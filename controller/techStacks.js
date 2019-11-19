@@ -27,4 +27,18 @@ techStacks.insert = function(req, res) {
   }
 }
 
+techStacks.delete = function(req, res) {
+  const result = req.db
+    .get('techStacks')
+    .remove({ id: req.params.id })
+    .write()
+
+  if (result) {
+    console.log('RESULT', JSON.stringify(result[0]))
+    res.send(result[0])
+  } else {
+    res.status(500).send('General Error')
+  }
+}
+
 module.exports = techStacks
